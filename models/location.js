@@ -14,7 +14,7 @@ module.exports = {
     },
 
     get: (id) => {
-        return data.find((obj) => obj.vehicle_id == id);
+        return data.filter((obj) => obj.vehicle_id == id);
     },
 
     all: () => {

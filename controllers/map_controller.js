@@ -4,9 +4,15 @@ var Location = require('../models/location');
 module.exports = {
     
     show: (req, res, next) => {
+        let vv = Vehicle.all();
+        let ve = lo = {};
+        if (vv.length > 0) {
+            ve = vv[0];
+            lo = Location.get(ve.id);
+        }
         res.render('index.html', {
-            vehicles: Vehicle.all(),
-            locations: Location.all()
+            vehicle: ve,
+            locations: lo
         });
     },
 
