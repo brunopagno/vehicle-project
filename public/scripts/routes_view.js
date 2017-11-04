@@ -20,9 +20,13 @@ const RoutesView = {
         } else {
             route = route.polyline;
             route.setLatLngs(entry.locations);
-            if (entry.locations.length > 0) {
+            if (entry.locations.length > 1) {
                 let lastLocation = entry.locations[entry.locations.length - 1];
-                route.marker = L.marker(lastLocation, {icon: RoutesView._getIcon()}).addTo(vmap);
+                let beforeLocation = entry.locations[entry.locations.length - 2];
+                route.marker = L.marker(lastLocation, {
+                    icon: RoutesView._getIcon(),
+                    rotationAngle: RoutesView._getAngle(lastLocation, beforeLocation)
+                }).addTo(vmap);
             }
         }
     },
@@ -64,5 +68,11 @@ const RoutesView = {
             });
         }
         return RoutesView._icon;
+    },
+
+    _getAngle: (lastLocation, beforeLocation) => {
+        let dx = lastLocation.lat - beforeLocation.lat;
+        let dy = lastLocation.lng - beforeLocation.lng;
+        return Math.atan2(dy, dx) * (180 / Math.PI) + 90;
     }
 }
