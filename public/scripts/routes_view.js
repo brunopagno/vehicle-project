@@ -23,10 +23,16 @@ const RoutesView = {
             if (entry.locations.length > 1) {
                 let lastLocation = entry.locations[entry.locations.length - 1];
                 let beforeLocation = entry.locations[entry.locations.length - 2];
-                route.marker = L.marker(lastLocation, {
-                    icon: RoutesView._getIcon(),
-                    rotationAngle: RoutesView._getAngle(lastLocation, beforeLocation)
-                }).addTo(vmap);
+                let angle = RoutesView._getAngle(lastLocation, beforeLocation);
+                if (!route.marker) {
+                    route.marker = L.marker(lastLocation, {
+                        icon: RoutesView._getIcon(),
+                        rotationAngle: angle
+                    }).addTo(vmap);
+                } else {
+                    route.marker.setLatLng(lastLocation);
+                    route.marker.setRotationAngle(angle);
+                }
             }
         }
     },
