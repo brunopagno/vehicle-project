@@ -3,17 +3,16 @@ var Location = require('../models/location');
 
 module.exports = {
     
-    show: (req, res, next) => {
-        let vv = Vehicle.all();
-        let ve = lo = {};
-        if (vv.length > 0) {
-            ve = vv[0];
-            lo = Location.get(ve.id);
-        }
+    index: (req, res, next) => {
         res.render('index.html', {
-            vehicle: ve,
-            locations: lo
+            vehicle_id: Vehicle.all()[5].id
         });
     },
+
+    single: (req, res, next) => {
+        res.json({
+            locations: Location.get(req.params.id)
+        });
+    }
 
 };
