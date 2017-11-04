@@ -1,5 +1,4 @@
 var express = require('express');
-var bodyParser = require('body-parser')
 var path = require('path');
 
 var port = process.env.PORT || 3000;
@@ -9,8 +8,14 @@ var mapRoutes = require('./routes/map');
 
 var app = express();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
+app.use((err, req, res, next) => {
+    if (err && req.method == "DELETE") {
+        next();
+    } else {
+        console.log(err);
+    }
+});
 
 // views
 app.set('views', 'views');
