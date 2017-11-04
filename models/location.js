@@ -1,5 +1,7 @@
 var data = [];
 
+var Vehicle = require('./vehicle');
+
 // data should be something like this
 // l = {
 //     "vehicle_id": "uuid",
@@ -10,7 +12,9 @@ var data = [];
 
 module.exports = {
     add: (obj) => {
-        data.push(obj);
+        if (Vehicle.get(obj.vehicle_id)) {
+            data.push(obj);
+        }
     },
 
     get: (id) => {
