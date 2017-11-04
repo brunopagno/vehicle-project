@@ -1,16 +1,38 @@
-var lastLocation = [52.53, 13.403];
+const RoutesView = {
+    _routes: [],
 
-// gather the data
-function updatethething(vehicle_id) {
-    fetch('/map/' + vehicle_id).then((response) => {
-        response.json().then((result) => {
-            locations = result.locations;
-            L.polyline(locations).addTo(vmap);
-            lastLocation = locations[locations.length - 1];
+    updateData: () => {
+        fetch('/map/data').then((response) => {
+            response.json().then((result) => {
+                result.forEach((entry) => {
+                    RoutesView._updateRoute(entry);
+                })
+            });
         });
-    });
-}
+    },
 
-function gotolocation() {
-    vmap.panTo(new L.LatLng(lastLocation.lat, lastLocation.lng));
+    _updateRoute: (entry) => {
+        let polyline = RoutesView._routes.find((route) => {
+            return route.id == entry.vehicle.id;
+        });
+        if (!polyline) {
+            polyline = L.polyline(entry.locations).addTo(vmap)
+            polyline.on('mouseover', RoutesView._onHover);
+            RoutesView._routes.push({
+                id: entry.vehicle.id,
+                polyline: polyline
+            });
+        } else {
+            polyline = polyline.polyline;
+            polyline.setLatLngs(entry.locations);
+        }
+    },
+    
+    _onHover: (e) => {
+        let layer = e.target;
+
+        layer.setStyle({
+            color: 'red'
+        });
+    }
 }

@@ -4,24 +4,36 @@
     <meta charset="UTF-8">
     <title>Vehicle project</title>
 
-    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/vmap.css"/>
     <link rel="stylesheet" href="/leaflet/leaflet.css"/>
 
     <script src="/leaflet/leaflet.js"></script>
 </head>
 <body>
 
-    <p>
-        <a href="#" onmousedown="gotolocation()">Go to location</a>
-    </p>
+    <div class="nav">
+        <p>
+            <a href="#" onmousedown="console.log('placeholder action')">Action</a>
+            |
+            <a href="#" onmousedown="console.log('placeholder action 2')">Action 2</a>
+        </p>
+    </div>
 
     <div id="vmap"></div>
+
+    <script>
+        // globally accessible leaflet map on the view
+        const vmap = L.map('vmap').setView([52.53, 13.403], 13);
+    </script>
 
     <script src="/scripts/map.js"></script>
     <script src="/scripts/view_actions.js"></script>
 
     <script>
-        setInterval(() => updatethething('<%- vehicle_id %>'), 3000);
+        MapView.initialize();
+
+        // update map each second
+        setInterval(RoutesView.updateData, 1000);
     </script>
 
 </body>
