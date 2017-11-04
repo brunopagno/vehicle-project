@@ -26,8 +26,6 @@ module.exports = {
                 "lng": req.body.lng,
                 "at": new Date(req.body.at)
             });
-        } else {
-            console.log("outside boundaries");
         }
         res.status(204).end();
     },
