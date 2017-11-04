@@ -3,8 +3,8 @@ var path = require('path');
 
 var port = process.env.PORT || 3000;
 
-var apiRoutes = require('./routes/api');
-var mapRoutes = require('./routes/map');
+var apiRoutes = require('./routes/api_router');
+var mapRoutes = require('./routes/map_router');
 
 var app = express();
 
