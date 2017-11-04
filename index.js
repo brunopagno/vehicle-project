@@ -24,6 +24,7 @@ app.engine('html', require('ejs').renderFile);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/leaflet', express.static(__dirname + '/node_modules/leaflet/dist/'));
 app.use('/leafletrotated', express.static(__dirname + '/node_modules/leaflet-rotatedmarker/'));
+app.use('/leafletcluster', express.static(__dirname + '/node_modules/leaflet.markercluster/dist'));
 
 // routes
 app.use('/', apiRoutes);

@@ -28,7 +28,8 @@ const RoutesView = {
                     route.marker = L.marker(lastLocation, {
                         icon: RoutesView._getIcon(),
                         rotationAngle: angle
-                    }).addTo(vmap);
+                    });
+                    RoutesView._getRouteCluster().addLayer(route.marker);
                 } else {
                     route.marker.setLatLng(lastLocation);
                     route.marker.setRotationAngle(angle);
@@ -74,6 +75,15 @@ const RoutesView = {
             });
         }
         return RoutesView._icon;
+    },
+
+    _routeCluster: undefined,
+    _getRouteCluster: () => {
+        if(!RoutesView._routeCluster) {
+            RoutesView._routeCluster = L.markerClusterGroup();
+            RoutesView._routeCluster.addTo(vmap)
+        }
+        return RoutesView._routeCluster;
     },
 
     _getAngle: (lastLocation, beforeLocation) => {
