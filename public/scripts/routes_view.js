@@ -38,7 +38,7 @@ const RoutesView = {
     },
 
     _onMapZoomed: (e) => {
-        if (e.target.getZoom() >= _autoShowRoutesZoomLevel) {
+        if (e.target.getZoom() >= RoutesView._autoShowRoutesZoomLevel) {
             RoutesView._vehicleRoutes.forEach((vehicleRoute) => {
                 if(vmap.getBounds().contains(vehicleRoute.marker.getLatLng())) {
                     vehicleRoute.showRoute();
@@ -54,7 +54,7 @@ const RoutesView = {
     },
 
     _onMapMoved: (e) => {
-        if (e.target.getZoom() >= _autoShowRoutesZoomLevel) {
+        if (e.target.getZoom() >= RoutesView._autoShowRoutesZoomLevel) {
             RoutesView._vehicleRoutes.forEach((vehicleRoute) => {
                 if(vmap.getBounds().contains(vehicleRoute.marker.getLatLng())) {
                     vehicleRoute.showRoute();
