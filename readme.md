@@ -34,11 +34,14 @@ This project was written in nodejs with the help of a few other libs. Most notab
 
 ![Vehicle Project](/doc/capture.png?raw=true)
 
-The app has three "actions" on the view:
+The app has a few "actions" the user can do:
 
 * Reset map: literally deletes all vehicle and location entries. Use it to reset the application and start capturing data again.
 * Reset locations: deletes all location data. Use it to reset routes for all vehicles.
 * View data: dumps all the data in the application in the console and in a div at the bottom of the page. Use it to view all stored information the application is using.
+
+* Zoom in/out: while zooming the markers will be clustered/declustered. Also, when the user zooms in enough the application will automatically display the routes for markers in view.
+* Mouse over/out: the user can also hover a marker to show it's route. When the mouse leaves the route should disappear.
 
 The project is structured as follows:
 
