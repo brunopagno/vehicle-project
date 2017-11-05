@@ -6,6 +6,7 @@ var Location = require('../models/location');
 
 module.exports = {
 
+    // Adds new vehicles
     add: (req, res, next) => {
         Vehicle.add({
             "id": req.body.id
@@ -13,6 +14,7 @@ module.exports = {
         res.status(204).end();
     },
 
+    // Adds new location entries if inside boundaries
     update: (req, res, next) => {
         let distance = geo.getDistanceSimple({
             latitude: req.body.lat,
@@ -30,6 +32,7 @@ module.exports = {
         res.status(204).end();
     },
 
+    // Removes vehicles
     delete: (req, res, next) => {
         Vehicle.remove({
             "id": req.params.id

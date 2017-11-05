@@ -56,11 +56,13 @@ The project is structured as follows:
 
 **test**: Define tests for the application.
 
-### A better explanation of the frontend
+### A better explanation of technology choices
 
 Considering the application consists of displaying vehicles and their routes the most obvious form of visualizing it is a map. Leafletjs is an open source lib for interactive maps which happens to have a friendly api and a few nice plugins to accelerate development.
 
-I believe there's no need for a frontend framework in this situation as most of the work is on leaflet's map. A frontend framework seems like overkill (and a bit of overhead) for an application like this.
+I believe there's no need for a frontend framework in this situation as most of the work is on leaflet's map. A frontend framework would feel like overkill (and a bit of overhead) for an application like this. Still it would be an interesting addition depending on how this project got expanded.
+
+For the backend the choice of nodejs was simply because it offers less development overhead than other technologies I was used to. Also nodejs has a huge community, a large amount of plugins and good documentation.
 
 ### Testing with 1000 vehicles
 

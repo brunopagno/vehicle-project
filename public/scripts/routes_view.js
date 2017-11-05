@@ -4,14 +4,14 @@ const RoutesView = {
     _cluster: L.markerClusterGroup(),
     _autoShowRoutesZoomLevel: 16,
 
-    // register in any map event necessary
+    // on initialization register in any map event necessary
     initialize: () => {
         vmap.on('zoomend', RoutesView._onMapZoomed);
         vmap.on('moveend', RoutesView._onMapMoved);
         vmap.addLayer(RoutesView._cluster);
     },
 
-    // Method called for "generic update".
+    // used to update data on the map. Should be called in time intervals.
     updateData: () => {
         fetch('/map/data').then((response) => {
             response.json().then((result) => {
