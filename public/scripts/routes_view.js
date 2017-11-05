@@ -1,12 +1,14 @@
 const RoutesView = {
     // list of VehicleRoute
     _vehicleRoutes: [],
+    _cluster: L.markerClusterGroup(),
+    _autoShowRoutesZoomLevel: 16,
 
     // register in any map event necessary
     initialize: () => {
-        vmap.on('zoomend', (e) => {
-            console.log("ZOOME => " + e.target.getZoom());
-        });
+        vmap.on('zoomend', RoutesView._onMapZoomed);
+        vmap.on('moveend', RoutesView._onMapMoved);
+        vmap.addLayer(RoutesView._cluster);
     },
 
     // Method called for "generic update".
@@ -28,10 +30,38 @@ const RoutesView = {
         if (!vehicleRoute) {
             let vehicle = new VehicleRoute(entry);
             RoutesView._vehicleRoutes.push(vehicle);
-            vehicle.registerOnMap(vmap);
+            vehicle.registerOn(RoutesView._cluster);
         } else {
             vehicleRoute.updateLine(entry);
             vehicleRoute.updateMaker(entry);
+        }
+    },
+
+    _onMapZoomed: (e) => {
+        if (e.target.getZoom() >= _autoShowRoutesZoomLevel) {
+            RoutesView._vehicleRoutes.forEach((vehicleRoute) => {
+                if(vmap.getBounds().contains(vehicleRoute.marker.getLatLng())) {
+                    vehicleRoute.showRoute();
+                } else {
+                    vehicleRoute.hideRoute();
+                }
+            });
+        } else {
+            RoutesView._vehicleRoutes.forEach((vehicleRoute) => {
+                vehicleRoute.hideRoute();
+            });
+        }
+    },
+
+    _onMapMoved: (e) => {
+        if (e.target.getZoom() >= _autoShowRoutesZoomLevel) {
+            RoutesView._vehicleRoutes.forEach((vehicleRoute) => {
+                if(vmap.getBounds().contains(vehicleRoute.marker.getLatLng())) {
+                    vehicleRoute.showRoute();
+                } else {
+                    vehicleRoute.hideRoute();
+                }
+            });
         }
     }
 }
