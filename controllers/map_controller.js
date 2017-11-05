@@ -29,6 +29,13 @@ module.exports = {
 
     locationReset: (req, res, next) => {
         Location.reset();
-    }    
+    },
+
+    dump: (req, res, next) => {
+        res.json({
+            vehicles: Vehicle.all(),
+            locations: Location.all()
+        });
+    }
 
 };
