@@ -30,6 +30,14 @@ $ npm test
 
 This project was written in nodejs with the help of a few other libs. Most notably [leaflet.js](http://leafletjs.com/).
 
+![Vehicle Project](https://bitbucket.org/brunopagno/vehicle-project)
+
+The app has three "actions" on the view:
+
+* Reset map: literally deletes all vehicle and location entries. Use it to reset the application and start capturing data again.
+* Reset locations: deletes all location data. Use it to reset routes for all vehicles.
+* View data: dumps all the data in the application in the console and in a div at the bottom of the page. Use it to view all stored information the application is using.
+
 The project is structured as follows:
 
 `index.js` is the entry point which setups the server and binds a port to listen.
