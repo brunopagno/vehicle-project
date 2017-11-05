@@ -30,7 +30,7 @@ $ npm test
 
 This project was written in nodejs with the help of a few other libs. Most notably [leaflet.js](http://leafletjs.com/).
 
-![Vehicle Project](https://bitbucket.org/brunopagno/vehicle-project)
+![Vehicle Project](/doc/capture.png?raw=true)
 
 The app has three "actions" on the view:
 
