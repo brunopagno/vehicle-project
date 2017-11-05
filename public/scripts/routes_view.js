@@ -1,6 +1,15 @@
 const RoutesView = {
-    _routes: [],
+    // list of VehicleRoute
+    _vehicleRoutes: [],
 
+    // register in any map event necessary
+    initialize: () => {
+        vmap.on('zoomend', (e) => {
+            console.log("ZOOME => " + e.target.getZoom());
+        });
+    },
+
+    // Method called for "generic update".
     updateData: () => {
         fetch('/map/data').then((response) => {
             response.json().then((result) => {
@@ -11,84 +20,18 @@ const RoutesView = {
         });
     },
 
+    // internal update, will create new "route element" if new id or update existing otherwise
     _updateRoute: (entry) => {
-        let route = RoutesView._routes.find((r) => {
+        let vehicleRoute = RoutesView._vehicleRoutes.find((r) => {
             return r.id == entry.vehicle.id;
         });
-        if (!route) {
-            RoutesView._routes.push(RoutesView._createRoute(entry));
+        if (!vehicleRoute) {
+            let vehicle = new VehicleRoute(entry);
+            RoutesView._vehicleRoutes.push(vehicle);
+            vehicle.registerOnMap(vmap);
         } else {
-            route = route.polyline;
-            route.setLatLngs(entry.locations);
-            if (entry.locations.length > 1) {
-                let lastLocation = entry.locations[entry.locations.length - 1];
-                let beforeLocation = entry.locations[entry.locations.length - 2];
-                let angle = RoutesView._getAngle(lastLocation, beforeLocation);
-                if (!route.marker) {
-                    route.marker = L.marker(lastLocation, {
-                        icon: RoutesView._getIcon(),
-                        rotationAngle: angle
-                    });
-                    RoutesView._getRouteCluster().addLayer(route.marker);
-                } else {
-                    route.marker.setLatLng(lastLocation);
-                    route.marker.setRotationAngle(angle);
-                }
-            }
+            vehicleRoute.updateLine(entry);
+            vehicleRoute.updateMaker(entry);
         }
-    },
-
-    _createRoute: (entry) => {
-        let polyline = L.polyline(entry.locations).addTo(vmap)
-        polyline.on('mouseover', RoutesView._onMouseOver);
-        polyline.on('mouseout', RoutesView._onMouseOut);
-
-        return {
-            id: entry.vehicle.id,
-            polyline: polyline
-        };
-    },
-
-    _onMouseOver: (e) => {
-        let layer = e.target;
-
-        layer.setStyle({
-            color: 'red'
-        });
-    },
-
-    _onMouseOut: (e) => {
-        let layer = e.target;
-        layer.setStyle({
-            color: 'blue'
-        });
-    },
-
-    _icon: undefined,
-    _getIcon: () => {
-        if (!RoutesView._icon) {
-            RoutesView._icon = L.icon({
-                iconUrl: '/images/vehicle.png',
-                iconSize: [24, 24], // size of the icon
-                iconAnchor: [12, 12], // point of the icon which will correspond to marker's location
-                popupAnchor: [-3, -3] // point from which the popup should open relative to the iconAnchor
-            });
-        }
-        return RoutesView._icon;
-    },
-
-    _routeCluster: undefined,
-    _getRouteCluster: () => {
-        if(!RoutesView._routeCluster) {
-            RoutesView._routeCluster = L.markerClusterGroup();
-            RoutesView._routeCluster.addTo(vmap)
-        }
-        return RoutesView._routeCluster;
-    },
-
-    _getAngle: (lastLocation, beforeLocation) => {
-        let dx = lastLocation.lat - beforeLocation.lat;
-        let dy = lastLocation.lng - beforeLocation.lng;
-        return Math.atan2(dy, dx) * (180 / Math.PI) + 90;
     }
 }

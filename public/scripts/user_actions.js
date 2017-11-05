@@ -1,9 +1,9 @@
 const UserActions = {
-    resetMap = () => {
+    resetMap: () => {
         fetch('map/fullreset');
     },
 
-    resetLocations = () => {
+    resetLocations: () => {
         fetch('map/locationsreset');
     }
 };

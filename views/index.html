@@ -12,6 +12,8 @@
     <script src="/leaflet/leaflet.js"></script>
     <script src="/leafletrotated/leaflet.rotatedMarker.js"></script>
     <script src="/leafletcluster/leaflet.markercluster.js"></script>
+    <script src="/scripts/util.js"></script>
+    <script src="/scripts/vehicle_route.js"></script>
 </head>
 <body>
 
@@ -36,6 +38,7 @@
 
     <script>
         MapView.initialize();
+        RoutesView.initialize();
 
         // update map each second
         setInterval(RoutesView.updateData, 1000);
