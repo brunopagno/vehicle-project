@@ -44,6 +44,8 @@ The project is structured as follows:
 
 `index.js` is the entry point which setups the server and binds a port to listen.
 
+`config.js` has configuration for server rules of center point and maximum range to capture data.
+
 **models**: Define structure and access to in memory data. The only two types are Vehicle and Location. The first keeps track of registered vehicles and the second keeps information about route.
 
 **routes**: Define the routes the application will answer to. Here separated in `api_routes` and `map_routes` to make clear the distinction between the routes the map visualization and the location tracker (simulation tool) use. The routes point to methods defined in controllers.
