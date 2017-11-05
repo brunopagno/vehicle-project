@@ -16,7 +16,9 @@ const RoutesView = {
         fetch('/map/data').then((response) => {
             response.json().then((result) => {
                 result.forEach((entry) => {
-                    RoutesView._updateRoute(entry);
+                    if (entry.locations.length > 1) {
+                        RoutesView._updateRoute(entry);
+                    }
                 })
             });
         });
