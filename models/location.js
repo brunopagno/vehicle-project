@@ -23,5 +23,9 @@ module.exports = {
 
     all: () => {
         return data;
+    },
+
+    reset: () => {
+        data = [];
     }
 };

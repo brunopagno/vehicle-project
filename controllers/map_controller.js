@@ -20,6 +20,15 @@ module.exports = {
         res.json({
             locations: Location.get(req.params.id)
         });
-    }
+    },
+
+    fullReset: (req, res, next) => {
+        Vehicle.reset();
+        Location.reset();
+    },
+
+    locationReset: (req, res, next) => {
+        Location.reset();
+    }    
 
 };

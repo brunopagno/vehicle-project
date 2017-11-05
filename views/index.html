@@ -17,9 +17,9 @@
 
     <div class="nav">
         <p>
-            <a href="#" onmousedown="console.log('placeholder action')">Action</a>
+            <a href="#" onmousedown="UserActions.resetMap()">Reset map</a>
             |
-            <a href="#" onmousedown="console.log('placeholder action 2')">Action 2</a>
+            <a href="#" onmousedown="UserActions.resetLocations()">Reset locations</a>
         </p>
     </div>
 
@@ -30,6 +30,7 @@
         const vmap = L.map('vmap').setView([52.53, 13.403], 13);
     </script>
 
+    <script src="/scripts/user_actions.js"></script>
     <script src="/scripts/map_view.js"></script>
     <script src="/scripts/routes_view.js"></script>
 

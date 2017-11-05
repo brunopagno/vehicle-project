@@ -61,6 +61,11 @@ describe('validate location model', () => {
 
         expect(Location.all().length).to.be.equal(amount);
     });
+
+    it('clears all location data on reset', () => {
+        Location.reset();
+        expect(Location.all().length).to.be.equal(0);
+    });
 });
 
 describe('validate vehicle model', () => {
@@ -102,5 +107,10 @@ describe('validate vehicle model', () => {
 
         expect(list).to.be.an('array');
         expect(last.id).to.be.equal('asdf');
+    });
+
+    it('clears all vehicle data on reset', () => {
+        Vehicle.reset();
+        expect(Vehicle.all().length).to.be.equal(0);
     });
 });
