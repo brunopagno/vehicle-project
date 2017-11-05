@@ -5,6 +5,7 @@
     <title>Vehicle project</title>
 
     <link rel="stylesheet" href="/css/vmap.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/leaflet/leaflet.css"/>
     <link rel="stylesheet" href="/leafletcluster/MarkerCluster.css"/>
     <link rel="stylesheet" href="/leafletcluster/MarkerCluster.Default.css"/>
@@ -20,10 +21,17 @@
     <div class="nav">
         <p>
             <a href="#" onmousedown="UserActions.resetMap()">Reset map</a>
-            |
+            <br>
+            <small>(Removes all vehicles & locations)</small>
+        </p>
+        <p>
             <a href="#" onmousedown="UserActions.resetLocations()">Reset locations</a>
+            <br>
+            <small>(Removes only locations)</small>
         </p>
     </div>
+
+    <div class="clear"></div>
 
     <div id="vmap"></div>
 
