@@ -2,8 +2,6 @@
 
 Hello there!
 
-Public accessible at https://vehicleproject.herokuapp.com/
-
 To run with docker:
 
 ```
